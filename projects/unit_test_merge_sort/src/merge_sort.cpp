@@ -2,13 +2,13 @@
 
 const long long INF = 1e9;
 
-void MergeNameSpace::merge(std::vector<int>& vec, int l, int mid, int r) {
+void MergeNameSpace::merge(std::vector<long long>& vec, int l, int mid, int r) {
     int vec1_size, vec2_size;
     vec1_size = mid - l + 1;
     vec2_size = r - mid;
 
-    std::vector<int> vec_first(vec1_size + 1); // вектор для левой части          
-    std::vector<int> vec_second(vec2_size + 1); // вектор для правой части
+    std::vector<long long> vec_first(vec1_size + 1); // вектор для левой части          
+    std::vector<long long> vec_second(vec2_size + 1); // вектор для правой части
    
     vec_first[vec1_size] = INF;  // последние элементы самый МАКС
     vec_second[vec2_size] = INF;
@@ -47,7 +47,7 @@ void MergeNameSpace::merge(std::vector<int>& vec, int l, int mid, int r) {
     }
 }
 
-void MergeNameSpace::merge_sort(std::vector<int>& vec, int l, int r) {
+void MergeNameSpace::merge_sort(std::vector<long long>& vec, int l, int r) {
     if (l < r) {
         int mid = (l + r) / 2;
         merge_sort(vec, l, mid);
