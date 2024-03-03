@@ -1,1 +1,1 @@
-# kmms_prog_2023
+Homework №1, First Year, Sedond Term, Modern Programming
