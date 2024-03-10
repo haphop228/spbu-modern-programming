@@ -42,3 +42,7 @@ for /L %%i in (0,1,6) do (
 )
 
 copy ..\run_tests.bat .
+
+cd build_ninja
+run_tests.bat
+

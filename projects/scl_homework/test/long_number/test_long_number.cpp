@@ -23,6 +23,7 @@ class EqualityFixture : public testing::Test {
 		IBusko::LongNumber twelve = IBusko::LongNumber("12");
 		IBusko::LongNumber negative_one = IBusko::LongNumber("-1");
 };
+
 TEST_F(EqualityFixture, equal) {
 	ASSERT_TRUE(one_v1 == one_v2) << "Проверка " << one_v1 << " == " << one_v2;
 }
@@ -31,7 +32,7 @@ TEST_F(EqualityFixture, not_equal) {
 	ASSERT_FALSE(one_v1 == twelve) << "Проверка " << one_v1 << " == " << twelve;
 }
 
-TEST_F(EqualityFix ture, not_equal_negative_var) {
+TEST_F(EqualityFixture, not_equal_negative_var) {
 	ASSERT_FALSE(one_v1 == negative_one) 
 		<< "Проверка " << one_v1 << " == " << negative_one;
 }
@@ -51,22 +52,22 @@ TEST_F(IsMoreFixture, more) {
 		<< "Проверка " << twelve << " > " << one_v1;
 }
 
-TEST_F(IsGreaterFixture, less) {
+TEST_F(IsMoreFixture, less) {
 	ASSERT_FALSE(one_v1 > twelve) 
 		<< "Проверка " << one_v1 << " > " << twelve;
 }
 
-TEST_F(IsGreaterFixture, equal) {
+TEST_F(IsMoreFixture, equal) {
 	ASSERT_FALSE(one_v1 > one_v2) 
 		<< "Проверка " << one_v1 << " > " << one_v2;
 }
 
-TEST_F(IsGreaterFixture, less_negative_var) {
+TEST_F(IsMoreFixture, less_negative_var) {
 	ASSERT_FALSE(negative_twelve > one_v1) 
 		<< "Проверка " << negative_twelve << " > " << one_v1;
 }
 
-TEST_F(IsGreaterFixture, equal_negative_var) {
+TEST_F(IsMoreFixture, equal_negative_var) {
 	ASSERT_TRUE(one_v1 > negative_one) 
 		<< "Проверка " << one_v1 << " > " << negative_one;
 }
@@ -122,7 +123,7 @@ TEST_F(Addition, same_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("2");
 	IBusko::LongNumber res;
 	res = one_v1 + one_v2;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << one_v1 << " + " << one_v2;
 }
 
@@ -130,7 +131,7 @@ TEST_F(Addition, big_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("6676666666666666666666");
 	IBusko::LongNumber res;
 	res = big_num_v1 + big_num_v2;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << big_num_v1 << " + " << big_num_v2;
 }
 
@@ -138,7 +139,7 @@ TEST_F(Addition, negative_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("-13");
 	IBusko::LongNumber res;
 	res = negative_one + negative_twelve;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << negative_one << " + " << negative_twelve;
 }
 
@@ -159,7 +160,7 @@ TEST_F(Subtraction, little_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("11");
 	IBusko::LongNumber res;
 	res = twelve - one_v1;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " - " << one_v1;
 }
 
@@ -167,7 +168,7 @@ TEST_F(Subtraction, null) {
 	IBusko::LongNumber ans = IBusko::LongNumber("0");
 	IBusko::LongNumber res;
 	res = one_v1 - one_v2;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << one_v1 << " - " << one_v2;
 }
 
@@ -175,7 +176,7 @@ TEST_F(Subtraction, big_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("6656666666666666666666");
 	IBusko::LongNumber res;
 	res = big_num_v2 - big_num_v1;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << big_num_v2 << " - " << big_num_v1;
 }
 
@@ -183,13 +184,14 @@ TEST_F(Subtraction, negative_ans) {
 	IBusko::LongNumber ans = IBusko::LongNumber("-6656666666666666666666");
 	IBusko::LongNumber res;
 	res = big_num_v1 - big_num_v2;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << big_num_v1 << " - " << big_num_v2;
 }
 
 //Tests of "*"
 class Multiplication : public testing::Test {
 	public:
+		IBusko::LongNumber null = IBusko::LongNumber("0");
 		IBusko::LongNumber twelve = IBusko::LongNumber("12");
 		IBusko::LongNumber negative_one = IBusko::LongNumber("-1");
 		IBusko::LongNumber negative_twelve = IBusko::LongNumber("-12");
@@ -202,15 +204,15 @@ TEST_F(Multiplication, little_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("24");
 	IBusko::LongNumber res;
 	res = twelve * multiplier;
-	ASSERT_EQ(res, ans);
-		<< "Неправильно посчитано: " << twelve << " * " << one_v1;
+	ASSERT_EQ(res, ans)
+		<< "Неправильно посчитано: " << twelve << " * " << multiplier;
 }
 
 TEST_F(Multiplication, big_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("66666666666666666666660000000000000000000");
 	IBusko::LongNumber res;
 	res = big_num_v1 * big_num_v2;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << big_num_v1 << " * " << big_num_v2;
 }
 
@@ -219,7 +221,7 @@ TEST_F(Multiplication, check_one) {
 	IBusko::LongNumber ans = IBusko::LongNumber("12");
 	IBusko::LongNumber res;
 	res = twelve * multiplier;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " * " << multiplier;
 }
 
@@ -227,7 +229,7 @@ TEST_F(Multiplication, two_nulls) {
 	IBusko::LongNumber ans = IBusko::LongNumber("0");
 	IBusko::LongNumber res;
 	res = null * null;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << null << " * " << null;
 }
 
@@ -235,7 +237,7 @@ TEST_F(Multiplication, positive_null) {
 	IBusko::LongNumber ans = IBusko::LongNumber("0");
 	IBusko::LongNumber res;
 	res = big_num_v1 * null;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << big_num_v1 << " * " << null;
 }
 
@@ -243,7 +245,7 @@ TEST_F(Multiplication, negative_null) {
 	IBusko::LongNumber ans = IBusko::LongNumber("0");
 	IBusko::LongNumber res;
 	res = negative_twelve * null;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << negative_twelve << " * " << null;
 }
 
@@ -251,7 +253,7 @@ TEST_F(Multiplication, negative_positive) {
 	IBusko::LongNumber ans = IBusko::LongNumber("-120000000000000000000");
 	IBusko::LongNumber res;
 	res = negative_twelve * big_num_v1;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << negative_twelve << " * " << big_num_v1;
 }
 
@@ -259,7 +261,7 @@ TEST_F(Multiplication, negative_negative) {
 	IBusko::LongNumber ans = IBusko::LongNumber("12");
 	IBusko::LongNumber res;
 	res = negative_twelve * negative_one;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << negative_twelve << " * " << negative_one;
 }
 
@@ -278,7 +280,7 @@ TEST_F(Division, without_reminder) {
 	IBusko::LongNumber ans = IBusko::LongNumber("6");
 	IBusko::LongNumber res;
 	res = twelve / divider;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " / " << divider;
 }
 
@@ -287,7 +289,7 @@ TEST_F(Division, with_reminder) {
 	IBusko::LongNumber ans = IBusko::LongNumber("2");
 	IBusko::LongNumber res;
 	res = twelve / divider;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " / " << divider;
 }
 
@@ -296,7 +298,7 @@ TEST_F(Division, negative_without_reminder) {
 	IBusko::LongNumber ans = IBusko::LongNumber("-6");
 	IBusko::LongNumber res;
 	res = twelve / divider;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " / " << divider;
 }
 
@@ -305,7 +307,7 @@ TEST_F(Division, negative_with_reminder) {
 	IBusko::LongNumber ans = IBusko::LongNumber("-2");
 	IBusko::LongNumber res;
 	res = twelve / divider;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " / " << divider;
 }
 
@@ -314,7 +316,7 @@ TEST_F(Division, check_one) {
 	IBusko::LongNumber ans = IBusko::LongNumber("12");
 	IBusko::LongNumber res;
 	res = twelve / divider;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " / " << divider;
 }
 
@@ -332,7 +334,7 @@ TEST_F(Remainder, positive_positive) {
 	IBusko::LongNumber ans = IBusko::LongNumber("2");
 	IBusko::LongNumber res;
 	res = twelve % five;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " % " << five;
 }
 
@@ -340,7 +342,7 @@ TEST_F(Remainder, positive_negative) {
 	IBusko::LongNumber ans = IBusko::LongNumber("3");
 	IBusko::LongNumber res;
 	res = negative_twelve % five;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << negative_twelve << " % " << five;
 }
 
@@ -348,7 +350,7 @@ TEST_F(Remainder, negative_negative) {
 	IBusko::LongNumber ans = IBusko::LongNumber("3");
 	IBusko::LongNumber res;
 	res = negative_twelve % negative_five;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << negative_twelve << " % " << negative_five;
 }
 
@@ -356,7 +358,7 @@ TEST_F(Remainder, check_null) {
 	IBusko::LongNumber ans = IBusko::LongNumber("0");
 	IBusko::LongNumber res;
 	res = null % negative_twelve;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << null << " % " << negative_twelve;
 }
 
@@ -364,7 +366,7 @@ TEST_F(Remainder, same_nums) {
 	IBusko::LongNumber ans = IBusko::LongNumber("0");
 	IBusko::LongNumber res;
 	res = twelve % twelve;
-	ASSERT_EQ(res, ans);
+	ASSERT_EQ(res, ans)
 		<< "Неправильно посчитано: " << twelve << " % " << twelve;
 }
 

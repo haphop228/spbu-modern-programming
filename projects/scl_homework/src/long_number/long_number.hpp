@@ -25,9 +25,11 @@ namespace IBusko {
 			LongNumber& operator = (const LongNumber& x);
 			LongNumber& operator = (LongNumber&& x);
 			
-			bool operator == (const LongNumber& x);
-			bool operator > (const LongNumber& x);
-			bool operator < (const LongNumber& x);
+			bool operator == (const LongNumber& x) const;
+			bool operator != (const LongNumber& x) const;
+			bool operator > (const LongNumber& x) const;
+			bool operator < (const LongNumber& x) const;
+			
 			
 			LongNumber operator + (const LongNumber& x);
 			LongNumber operator - (const LongNumber& x);

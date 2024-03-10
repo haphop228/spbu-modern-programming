@@ -36,17 +36,22 @@ namespace IBusko {
 		return *this;
 	}
 	
-	bool LongNumber::operator == (const LongNumber& x) {
+	bool LongNumber::operator == (const LongNumber& x) const{
 		// TODO
 		return true;
 	}
 	
-	bool LongNumber::operator > (const LongNumber& x) {
+	bool LongNumber::operator != (const LongNumber& x) const{
 		// TODO
 		return true;
 	}
 	
-	bool LongNumber::operator < (const LongNumber& x) {
+	bool LongNumber::operator > (const LongNumber& x) const{
+		// TODO
+		return true;
+	}
+	
+	bool LongNumber::operator < (const LongNumber& x) const{
 		// TODO
 		return true;
 	}
