@@ -2,7 +2,7 @@
 
 #include "long_number.hpp"
 
-{
+
 TEST(get_digits_number, check_positive) {
 	IBusko::LongNumber x("12345");
 	ASSERT_EQ(5, x.get_digits_number())
@@ -186,7 +186,7 @@ TEST_F(Subtraction, negative_ans) {
 	ASSERT_EQ(res, ans);
 		<< "Неправильно посчитано: " << big_num_v1 << " - " << big_num_v2;
 }
-}
+
 //Tests of "*"
 class Multiplication : public testing::Test {
 	public:
@@ -270,8 +270,6 @@ class Division : public testing::Test {
 		IBusko::LongNumber twelve = IBusko::LongNumber("12");
 		IBusko::LongNumber negative_one = IBusko::LongNumber("-1");
 		IBusko::LongNumber negative_twelve = IBusko::LongNumber("-12");
-		IBusko::LongNumber big_num_v1 = IBusko::LongNumber("10000000000000000000");
-		IBusko::LongNumber big_num_v2 = IBusko::LongNumber("6666666666666666666666");
 };
 
 
@@ -321,7 +319,55 @@ TEST_F(Division, check_one) {
 }
 
 //Tests of "%"
-//TODO
+class Remainder : public testing::Test {
+	public:
+		IBusko::LongNumber null = IBusko::LongNumber("0");
+		IBusko::LongNumber twelve = IBusko::LongNumber("12");
+		IBusko::LongNumber five = IBusko::LongNumber("5");
+		IBusko::LongNumber negative_twelve = IBusko::LongNumber("-12");
+		IBusko::LongNumber negative_five = IBusko::LongNumber("-5");
+};
+
+TEST_F(Remainder, positive_positive) {
+	IBusko::LongNumber ans = IBusko::LongNumber("2");
+	IBusko::LongNumber res;
+	res = twelve % five;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " % " << five;
+}
+
+TEST_F(Remainder, positive_negative) {
+	IBusko::LongNumber ans = IBusko::LongNumber("3");
+	IBusko::LongNumber res;
+	res = negative_twelve % five;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << negative_twelve << " % " << five;
+}
+
+TEST_F(Remainder, negative_negative) {
+	IBusko::LongNumber ans = IBusko::LongNumber("3");
+	IBusko::LongNumber res;
+	res = negative_twelve % negative_five;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << negative_twelve << " % " << negative_five;
+}
+
+TEST_F(Remainder, check_null) {
+	IBusko::LongNumber ans = IBusko::LongNumber("0");
+	IBusko::LongNumber res;
+	res = null % negative_twelve;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << null << " % " << negative_twelve;
+}
+
+TEST_F(Remainder, same_nums) {
+	IBusko::LongNumber ans = IBusko::LongNumber("0");
+	IBusko::LongNumber res;
+	res = twelve % twelve;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " % " << twelve;
+}
+
 
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
