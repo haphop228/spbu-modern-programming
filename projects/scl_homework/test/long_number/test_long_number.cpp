@@ -152,6 +152,7 @@ class Subtraction : public testing::Test {
 		IBusko::LongNumber negative_twelve = IBusko::LongNumber("-12");
 		IBusko::LongNumber big_num_v1 = IBusko::LongNumber("10000000000000000000");
 		IBusko::LongNumber big_num_v2 = IBusko::LongNumber("6666666666666666666666");
+		IBusko::LongNumber null = IBusko::LongNumber("0");
 };
 
 TEST_F(Subtraction, little_nums) {
@@ -187,12 +188,139 @@ TEST_F(Subtraction, negative_ans) {
 }
 }
 //Tests of "*"
-//TODO
+class Multiplication : public testing::Test {
+	public:
+		IBusko::LongNumber twelve = IBusko::LongNumber("12");
+		IBusko::LongNumber negative_one = IBusko::LongNumber("-1");
+		IBusko::LongNumber negative_twelve = IBusko::LongNumber("-12");
+		IBusko::LongNumber big_num_v1 = IBusko::LongNumber("10000000000000000000");
+		IBusko::LongNumber big_num_v2 = IBusko::LongNumber("6666666666666666666666");
+};
+
+TEST_F(Multiplication, little_nums) {
+	IBusko::LongNumber multiplier = IBusko::LongNumber("2");
+	IBusko::LongNumber ans = IBusko::LongNumber("24");
+	IBusko::LongNumber res;
+	res = twelve * multiplier;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " * " << one_v1;
+}
+
+TEST_F(Multiplication, big_nums) {
+	IBusko::LongNumber ans = IBusko::LongNumber("66666666666666666666660000000000000000000");
+	IBusko::LongNumber res;
+	res = big_num_v1 * big_num_v2;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << big_num_v1 << " * " << big_num_v2;
+}
+
+TEST_F(Multiplication, check_one) {
+	IBusko::LongNumber multiplier = IBusko::LongNumber("1");
+	IBusko::LongNumber ans = IBusko::LongNumber("12");
+	IBusko::LongNumber res;
+	res = twelve * multiplier;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " * " << multiplier;
+}
+
+TEST_F(Multiplication, two_nulls) {
+	IBusko::LongNumber ans = IBusko::LongNumber("0");
+	IBusko::LongNumber res;
+	res = null * null;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << null << " * " << null;
+}
+
+TEST_F(Multiplication, positive_null) {
+	IBusko::LongNumber ans = IBusko::LongNumber("0");
+	IBusko::LongNumber res;
+	res = big_num_v1 * null;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << big_num_v1 << " * " << null;
+}
+
+TEST_F(Multiplication, negative_null) {
+	IBusko::LongNumber ans = IBusko::LongNumber("0");
+	IBusko::LongNumber res;
+	res = negative_twelve * null;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << negative_twelve << " * " << null;
+}
+
+TEST_F(Multiplication, negative_positive) {
+	IBusko::LongNumber ans = IBusko::LongNumber("-120000000000000000000");
+	IBusko::LongNumber res;
+	res = negative_twelve * big_num_v1;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << negative_twelve << " * " << big_num_v1;
+}
+
+TEST_F(Multiplication, negative_negative) {
+	IBusko::LongNumber ans = IBusko::LongNumber("12");
+	IBusko::LongNumber res;
+	res = negative_twelve * negative_one;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << negative_twelve << " * " << negative_one;
+}
 
 //Testf of "/"
-//TODO
+class Division : public testing::Test {
+	public:
+		IBusko::LongNumber one = IBusko::LongNumber("1");
+		IBusko::LongNumber twelve = IBusko::LongNumber("12");
+		IBusko::LongNumber negative_one = IBusko::LongNumber("-1");
+		IBusko::LongNumber negative_twelve = IBusko::LongNumber("-12");
+		IBusko::LongNumber big_num_v1 = IBusko::LongNumber("10000000000000000000");
+		IBusko::LongNumber big_num_v2 = IBusko::LongNumber("6666666666666666666666");
+};
 
-//Tests 0f "%"
+
+TEST_F(Division, without_reminder) {
+	IBusko::LongNumber divider = IBusko::LongNumber("2");
+	IBusko::LongNumber ans = IBusko::LongNumber("6");
+	IBusko::LongNumber res;
+	res = twelve / divider;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " / " << divider;
+}
+
+TEST_F(Division, with_reminder) {
+	IBusko::LongNumber divider = IBusko::LongNumber("5");
+	IBusko::LongNumber ans = IBusko::LongNumber("2");
+	IBusko::LongNumber res;
+	res = twelve / divider;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " / " << divider;
+}
+
+TEST_F(Division, negative_without_reminder) {
+	IBusko::LongNumber divider = IBusko::LongNumber("-2");
+	IBusko::LongNumber ans = IBusko::LongNumber("-6");
+	IBusko::LongNumber res;
+	res = twelve / divider;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " / " << divider;
+}
+
+TEST_F(Division, negative_with_reminder) {
+	IBusko::LongNumber divider = IBusko::LongNumber("-5");
+	IBusko::LongNumber ans = IBusko::LongNumber("-2");
+	IBusko::LongNumber res;
+	res = twelve / divider;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " / " << divider;
+}
+
+TEST_F(Division, check_one) {
+	IBusko::LongNumber divider = one;
+	IBusko::LongNumber ans = IBusko::LongNumber("12");
+	IBusko::LongNumber res;
+	res = twelve / divider;
+	ASSERT_EQ(res, ans);
+		<< "Неправильно посчитано: " << twelve << " / " << divider;
+}
+
+//Tests of "%"
 //TODO
 
 int main(int argc, char **argv) {
