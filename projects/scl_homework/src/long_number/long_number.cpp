@@ -2,7 +2,9 @@
 
 namespace IBusko {
 	LongNumber::LongNumber() {
-		// TODO
+		numbers = new int [0];
+		length = 0;
+		sign = POSITIVE;
 	}
 	
 	LongNumber::LongNumber(const char* const str) {
