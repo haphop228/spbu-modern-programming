@@ -1,6 +1,10 @@
 #include "long_number.hpp"
 
 namespace IBusko {
+	
+	// ----------------------------------------------------------
+	// DONE
+	// ----------------------------------------------------------
 	LongNumber::LongNumber() {
 		numbers = new int [0];
 		length = 0;
@@ -8,9 +12,32 @@ namespace IBusko {
 	}
 	
 	LongNumber::LongNumber(const char* const str) {
-		// TODO
+		int i = 0;
+		length = 0;
+		
+		while(str[i] != '\0') {
+			length++;
+			i++;
+		}
+
+		//std::cout<< "FROM CLASS: " << length << std::endl;
+		if (str[0] == '-') {
+			sign = NEGATIVE;
+		}
+		else {
+			sign = POSITIVE;
+		}
+		
+		//std::cout<< "FROM CLASS: " << sign << std::endl;
+		numbers = new int [length];
+		for (int i = 0; i < length; i++) {
+			numbers[i] = str[i];
+		}
 	}
 	
+	// ----------------------------------------------------------
+	// NOT DONE
+	// ----------------------------------------------------------
 	LongNumber::LongNumber(const LongNumber& x) {
 		// TODO
 	}
@@ -101,6 +128,7 @@ namespace IBusko {
 	// ----------------------------------------------------------
 	int LongNumber::get_length(const char* const str) const {
 		// TODO
+		
 		int length = 0;
 		return length;
 	}
@@ -109,7 +137,9 @@ namespace IBusko {
 	// FRIENDLY
 	// ----------------------------------------------------------
 	std::ostream& operator << (std::ostream &os, const LongNumber& x) {
-		// TODO
+		for (int i = 0; i < x.length; i++){
+			os << char(x.numbers[i]);
+		}
 		return os;
 	}
 }

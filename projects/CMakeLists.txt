@@ -15,5 +15,6 @@ add_subdirectory(obuchaika)
 add_subdirectory(merge_sort)
 #add_subdirectory(unit_test_merge_sort)
 add_subdirectory(scl_homework)
+add_subdirectory(long_number)
 
 set(CMAKE_SUPPRESS_REGENERATION true)
