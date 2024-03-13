@@ -1,6 +1,6 @@
 #include "long_number.hpp"
 
-namespace IBusko {
+namespace AKrivoshein {
 	
 	// ----------------------------------------------------------
 	// DONE
@@ -39,15 +39,30 @@ namespace IBusko {
 	// NOT DONE
 	// ----------------------------------------------------------
 	LongNumber::LongNumber(const LongNumber& x) {
-		// TODO
+		length = x.length;
+		sign = x.sign;
+		numbers = new int[x.length];
+		for (int i = 0; i < length; i++){
+			numbers[i] = x.numbers[i];
+		}
 	}
 	
 	LongNumber::LongNumber(LongNumber&& x) {
-		// TODO
+		//Create new 
+		length = x.length;
+		sign = x.sign;
+		numbers = new int[x.length];
+		for (int i = 0; i < length; i++){
+			numbers[i] = x.numbers[i];
+		}
+		//Delete old
+		x.length = 0;
+		x.sign = POSITIVE;
+		x.numbers = nullptr;
 	}
 	
 	LongNumber::~LongNumber() {
-		// TODO
+		delete [] numbers;
 	}
 	
 	LongNumber& LongNumber::operator = (const char* const str) {

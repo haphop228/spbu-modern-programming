@@ -1,9 +1,11 @@
 #include <iostream>
 #include "long_number.hpp"
 
+typedef AKrivoshein::LongNumber ln;
+
 int main(){
 	//std::cout<<"Hello World!";
-	char str[12] = "0123456789";
+	char str[12] = "01234567891";
 	/*
 	for (int i = 0; i < 10; i++){
 		str[i] = ;
@@ -20,7 +22,10 @@ int main(){
 	}
 	std::cout<< std::endl << length << "length!!!";
 	*/
-	IBusko::LongNumber a(str);
-	std::cout << a;
+	ln a(str);
+	AKrivoshein::LongNumber b(a);
+	AKrivoshein::LongNumber c(AKrivoshein::LongNumber ("23456"));
+
+	std::cout << a << " " << b << " " << c;
 	return 0;
 }

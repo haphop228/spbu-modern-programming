@@ -46,6 +46,7 @@ for /L %%i in (0,1,7) do (
 
 copy ..\run_tests.bat .
 
-cd build_ninja
+::cd ..\build_ninja\long_number
+::start long_number.exe
 ::run_tests.bat
 

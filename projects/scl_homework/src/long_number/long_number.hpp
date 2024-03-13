@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace IBusko {
+namespace AKrivoshein {
 	class LongNumber {
 		static const char END = '\0';
 		static const char MINUS = '-';
