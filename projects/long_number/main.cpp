@@ -25,9 +25,9 @@ int main(){
 	ln a(str);
 	AKrivoshein::LongNumber b = str;
 	AKrivoshein::LongNumber c(AKrivoshein::LongNumber ("23456"));
-	ln d = a;
+	ln d = "01234567891";
 	ln e = ln ("865735435");
-	if (a == c){
+	if (a != d){
 		std::cout<< "TRUE" << std::endl;
 	}
 	else {
