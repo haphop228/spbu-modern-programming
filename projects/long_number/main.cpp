@@ -23,9 +23,17 @@ int main(){
 	std::cout<< std::endl << length << "length!!!";
 	*/
 	ln a(str);
-	AKrivoshein::LongNumber b(a);
+	AKrivoshein::LongNumber b = str;
 	AKrivoshein::LongNumber c(AKrivoshein::LongNumber ("23456"));
-
-	std::cout << a << " " << b << " " << c;
+	ln d = a;
+	ln e = ln ("865735435");
+	if (a == c){
+		std::cout<< "TRUE" << std::endl;
+	}
+	else {
+		std::cout << "FALSE" << std::endl;
+	}
+	
+	std::cout << a << " " << b << " " << c << " " << d << " " << e;
 	return 0;
 }

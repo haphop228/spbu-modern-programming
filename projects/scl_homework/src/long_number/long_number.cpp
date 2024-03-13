@@ -6,84 +6,141 @@ namespace AKrivoshein {
 	// DONE
 	// ----------------------------------------------------------
 	LongNumber::LongNumber() {
-		numbers = new int [0];
-		length = 0;
-		sign = POSITIVE;
+		numbers_ = new int [0];
+		length_ = 0;
+		sign_ = POSITIVE;
 	}
 	
 	LongNumber::LongNumber(const char* const str) {
 		int i = 0;
-		length = 0;
+		length_ = 0;
 		
 		while(str[i] != '\0') {
-			length++;
+			length_++;
 			i++;
 		}
 
 		//std::cout<< "FROM CLASS: " << length << std::endl;
 		if (str[0] == '-') {
-			sign = NEGATIVE;
+			sign_ = NEGATIVE;
 		}
 		else {
-			sign = POSITIVE;
+			sign_ = POSITIVE;
 		}
 		
 		//std::cout<< "FROM CLASS: " << sign << std::endl;
-		numbers = new int [length];
-		for (int i = 0; i < length; i++) {
-			numbers[i] = str[i];
+		numbers_ = new int [length_];
+		for (int i = 0; i < length_; i++) {
+			numbers_[i] = str[i];
 		}
 	}
 	
-	// ----------------------------------------------------------
-	// NOT DONE
-	// ----------------------------------------------------------
 	LongNumber::LongNumber(const LongNumber& x) {
-		length = x.length;
-		sign = x.sign;
-		numbers = new int[x.length];
-		for (int i = 0; i < length; i++){
-			numbers[i] = x.numbers[i];
+		length_ = x.length_;
+		sign_ = x.sign_;
+		numbers_ = new int[x.length_];
+		for (int i = 0; i < length_; i++){
+			numbers_[i] = x.numbers_[i];
 		}
 	}
 	
 	LongNumber::LongNumber(LongNumber&& x) {
 		//Create new 
-		length = x.length;
-		sign = x.sign;
-		numbers = new int[x.length];
-		for (int i = 0; i < length; i++){
-			numbers[i] = x.numbers[i];
+		length_ = x.length_;
+		sign_ = x.sign_;
+		numbers_ = new int[x.length_];
+		for (int i = 0; i < length_; i++){
+			numbers_[i] = x.numbers_[i];
 		}
 		//Delete old
-		x.length = 0;
-		x.sign = POSITIVE;
-		x.numbers = nullptr;
+		x.length_ = 0;
+		x.sign_ = POSITIVE;
+		x.numbers_ = nullptr;
 	}
 	
 	LongNumber::~LongNumber() {
-		delete [] numbers;
+		delete [] numbers_;
 	}
 	
 	LongNumber& LongNumber::operator = (const char* const str) {
-		// TODO
+		int i = 0;
+		length_ = 0;
+		
+		while(str[i] != '\0') {
+			length_++;
+			i++;
+		}
+
+		//std::cout<< "FROM CLASS: " << length << std::endl;
+		if (str[0] == '-') {
+			sign_ = NEGATIVE;
+		}
+		else {
+			sign_ = POSITIVE;
+		}
+		
+		//std::cout<< "FROM CLASS: " << sign << std::endl;
+		numbers_ = new int [length_];
+		for (int i = 0; i < length_; i++) {
+			numbers_[i] = str[i];
+		}
 		return *this;
 	}
 	
 	LongNumber& LongNumber::operator = (const LongNumber& x) {
-		// TODO
+		length_ = x.length_;
+		sign_ = x.sign_;
+		numbers_ = new int[x.length_];
+		for (int i = 0; i < length_; i++){
+			numbers_[i] = x.numbers_[i];
+		}
 		return *this;
 	}
 	
 	LongNumber& LongNumber::operator = (LongNumber&& x) {
-		// TODO
+		//Create new 
+		length_ = x.length_;
+		sign_ = x.sign_;
+		numbers_ = new int[x.length_];
+		for (int i = 0; i < length_; i++){
+			numbers_[i] = x.numbers_[i];
+		}
+		//Delete old
+		x.length_ = 0;
+		x.sign_ = POSITIVE;
+		x.numbers_ = nullptr;
 		return *this;
 	}
 	
 	bool LongNumber::operator == (const LongNumber& x) const{
-		// TODO
+		if (sign_ != x.sign_) {
+			return false;
+		}
+		else if (length_ != x.length_){
+			return false;
+		}
+		else {
+			if (length_ >= x.length_){
+				for (int i = 0; i < length_; i++){
+					if (numbers_[i] != x.numbers_[i]){
+						return false;
+					}
+				}
+			}
+			else { 
+				for (int i = 0; i < x.length_; i++){
+					if (numbers_[i] != x.numbers_[i]){
+						return false;
+					} 
+				}
+			}
+		}
 		return true;
 	}
+	
+	// ----------------------------------------------------------
+	// NOT DONE
+	// ----------------------------------------------------------
 	
 	bool LongNumber::operator != (const LongNumber& x) const{
 		// TODO
@@ -131,11 +188,11 @@ namespace AKrivoshein {
 	}
 	
 	int LongNumber::get_digits_number() const {
-		return length;
+		return length_;
 	}
 	
 	bool LongNumber::is_positive() const {
-		return sign == POSITIVE;
+		return sign_ == POSITIVE;
 	}
 	
 	// ----------------------------------------------------------
@@ -152,8 +209,8 @@ namespace AKrivoshein {
 	// FRIENDLY
 	// ----------------------------------------------------------
 	std::ostream& operator << (std::ostream &os, const LongNumber& x) {
-		for (int i = 0; i < x.length; i++){
-			os << char(x.numbers[i]);
+		for (int i = 0; i < x.length_; i++){
+			os << char(x.numbers_[i]);
 		}
 		return os;
 	}

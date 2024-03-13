@@ -9,9 +9,9 @@ namespace AKrivoshein {
 		static const int NEGATIVE = -1;
 		static const int POSITIVE = 1;
 		
-		int* numbers;
-		int length;
-		int sign;
+		int* numbers_;
+		int length_;
+		int sign_;
 		
 		public:
 			LongNumber();
