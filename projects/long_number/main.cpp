@@ -21,7 +21,7 @@ int main(){
 		i++;
 	}
 	std::cout<< std::endl << length << "length!!!";
-	*/
+	
 	ln a(str);
 	AKrivoshein::LongNumber b = str;
 	AKrivoshein::LongNumber c(AKrivoshein::LongNumber ("23456"));
@@ -33,7 +33,14 @@ int main(){
 	else {
 		std::cout << "FALSE" << std::endl;
 	}
+	*/
 	
-	std::cout << a << " " << b << " " << c << " " << d << " " << e;
+	ln a = "12";
+	ln b = "1";
+	AKrivoshein::LongNumber one_v1 = AKrivoshein::LongNumber("1");
+	AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("12");
+	bool print = twelve < one_v1; // false
+	std::cout << print;
+	//std::cout << a << " " << b << " " << c << " " << d << " " << e;
 	return 0;
 }

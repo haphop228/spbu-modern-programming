@@ -197,15 +197,44 @@ namespace AKrivoshein {
 		//Lastly, if equal
 		return false;
 	}
+		
+	bool LongNumber::operator < (const LongNumber& x) const {
+		//Firstly, check sign_
+		if (this->sign_ < x.sign_) {
+			return true;
+		}
+		else if (this->sign_ > x.sign_) {
+			return false;
+		}
+		
+		//Secondly, check length_
+		if (this->length_ < x.length_) {
+			return true;
+		}
+		else if (this->length_ > x.length_) {
+			return false;
+		}
+		
+		//Thirdly, check numbers_
+		for (int i = 0; i < length_; i++) {
+			if (this->numbers_[i] < x.numbers_[i]) {
+				return true;
+			}
+			else if (this->numbers_[i] == x.numbers_[i]) {
+				continue;
+			}
+			else {
+				return false;
+			}
+		}
 
+		//Lastly, if equal
+		return false;
+	}	
+	
 	// ----------------------------------------------------------
 	// NOT DONE
 	// ----------------------------------------------------------
-	
-	bool LongNumber::operator < (const LongNumber& x) const {
-		// TODO
-		return true;
-	}
 	
 	LongNumber LongNumber::operator + (const LongNumber& x) {
 		// TODO
