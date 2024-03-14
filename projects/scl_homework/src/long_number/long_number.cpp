@@ -268,13 +268,81 @@ namespace AKrivoshein {
 	LongNumber LongNumber::operator + (const LongNumber& x) {
 		//Three variants: ++, +-, --
 		
-		//++
-		/*
-		if (this->is_positive() && x.is_positive()) {
+
+		LongNumber result;
+		result.numbers_ = new int[0];
+		result.length_ = 0;
+		int index = 1;
+		int* interim_res = new int[index];
+		
+		if (this->is_positive() && x.is_positive()) { // ++
+			result.sign_ = POSITIVE;
+			if (this->get_digits_number() >= x.get_digits_number()) {
+				int tmp = 0;
+				//std::cout << "" << std::endl;
+				//std::cout << "IN THE ++" << std::endl;
+				for (int i = this->length_; i > 0; i--) {
+					//interim_res[index - 1] = this->numbers_[i] + x.numbers_[i];
+					//int tmp = 0;
+					int num = 0;
+					if (x.length_ - index <= -1) {
+						num = this->numbers_[this->length_ - index] + tmp;
+						//std::cout << "IN IF" << std::endl;
+
+					}
+					else {
+						num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
+						//std::cout << "IN ELSE" << std::endl;
+					}
+					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
+					tmp = 0;
+					//std::cout  << "this->length_: " <<  this->length_  << " x.length_: " <<  x.length_ << std::endl;
+					//std::cout << "num: " << num << std::endl;
+					//std::cout << "this->numbers_[i] " << this->numbers_[this->length_ - index] << std::endl;
+					//std::cout << "x.numbers_[i] " << x.numbers_[x.length_ - index] <<  std::endl;
+					if (num > 9) {
+						tmp = 1;
+						interim_res[index - 1] = num % 10;
+						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
+					}
+					else {
+						interim_res[index - 1] = num;
+						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
+						//std::cout << "IN THE num <= 9" << std::endl;
+					}
+					//result.numbers_[index] = 
+					
+					index++;
+					//std::cout << "INDEX:" << index << std::endl;
+				}
+				
+				result.length_ = index - 1;
+				result.numbers_ = new int[index - 1];
+				int i = 0;
+				while ((index - i) != 1) {
+					result.numbers_[index - i - 2] = interim_res[i];
+					//std::cout << "IN WHILE ID+EXEF: " << char(interim_res[i])  << " LOL "<< std::endl;
+					//std::cout<<result.numbers_[index - i] << std::endl;
+					i++;
+				}
+				/*
+				for (int i = 0; i < index; i++) {
+					std::cout << char(interim_res[i]) << " ";
+				}
+				*/
+				
+			}
+			else {
+				
+			}
+		}
+		else if (this->is_positive() && !x.is_positive()) { // +-
 			
 		}
-		*/
-		LongNumber result;
+		else { // --
+			
+		}
+		
 		return result;
 	}
 	

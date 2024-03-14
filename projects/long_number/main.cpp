@@ -45,16 +45,18 @@ int main(){
 	//AKrivoshein::LongNumber one_v1 = AKrivoshein::LongNumber("1");
 	//AKrivoshein::LongNumber one_v2 = AKrivoshein::LongNumber("-1");
 	//AKrivoshein::LongNumber one_v3 = AKrivoshein::LongNumber("-123");
-	AKrivoshein::LongNumber x("-1");
-	std::cout << x.get_digits_number();
-	//AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("123");
+	//AKrivoshein::LongNumber x("-1");
+	//std::cout << x.get_digits_number();
+	AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("19");
 	
 	
-	//AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("12");
+	AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("9");
 	//bool print = twelve < one_v1; // false
 	//std::cout << print;
 	//std::cout << one_v2 << "          " << one_v3 << "                    " << x;
 	//std::cout << x;
+	ln a = one_v4 + twelve;
+	std::cout << a;
 	//std::cout << a << " " << b << " " << c << " " << d << " ";
 	return 0;
 }
