@@ -13,7 +13,7 @@ namespace AKrivoshein {
 	}
 	
 	LongNumber::LongNumber(const char* const str) {
-		std::cout << "Constructor with parametrs" << std::endl;
+		//std::cout << "Constructor with parametrs" << std::endl;
 		int i = 0;
 		length_ = 0;
 		
@@ -44,20 +44,20 @@ namespace AKrivoshein {
 		*/
 		//std::cout << "" << std::endl;
 
-		std::cout<< "FROM CWP sign: " << sign_ << std::endl;
-		std::cout<< "FROM CWP length: " << length_ << std::endl;
-		std::cout<< std::endl;
+		//std::cout<< "FROM CWP sign: " << sign_ << std::endl;
+		//std::cout<< "FROM CWP length: " << length_ << std::endl;
+		//std::cout<< std::endl;
 		//std::cout<< "FROM CLASS: " << sign << std::endl;
 		numbers_ = new int [length_];
 		if (sign_ == NEGATIVE) {
 			for (int i = 0; i < length_; i++) {
-				std::cout << "in FOR" << std::endl;
+				//std::cout << "in FOR" << std::endl;
 				numbers_[i] = str[i + 1] - 48; // -48 because of ACII 
 			}
 		}
 		else {
 			for (int i = 0; i < length_; i++) {
-				std::cout << "in FOR" << std::endl;
+				//std::cout << "in FOR" << std::endl;
 				numbers_[i] = str[i] - 48; // -48 because of ACII 
 			}
 		}
@@ -269,6 +269,11 @@ namespace AKrivoshein {
 		//Three variants: ++, +-, --
 		
 		//++
+		/*
+		if (this->is_positive() && x.is_positive()) {
+			
+		}
+		*/
 		LongNumber result;
 		return result;
 	}

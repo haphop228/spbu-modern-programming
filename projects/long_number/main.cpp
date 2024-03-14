@@ -35,23 +35,26 @@ int main(){
 	}
 	*/
 	
-	ln a = str;
-	ln b;
-	b = AKrivoshein::LongNumber("-15");
-	ln c = "-123213213123213123123123123";
-	ln d;
-	d = b;
-	/*
-	AKrivoshein::LongNumber one_v1 = AKrivoshein::LongNumber("1");
-	AKrivoshein::LongNumber one_v2 = AKrivoshein::LongNumber("-1");
-	AKrivoshein::LongNumber one_v3 = AKrivoshein::LongNumber("-123");
-	AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("123");
-	*/
+	//ln a = str;
+	//ln b;
+	//b = AKrivoshein::LongNumber("-15");
+	//ln c = "-123213213123213123123123123";
+	//ln d;
+	//d = b;
+	
+	//AKrivoshein::LongNumber one_v1 = AKrivoshein::LongNumber("1");
+	//AKrivoshein::LongNumber one_v2 = AKrivoshein::LongNumber("-1");
+	//AKrivoshein::LongNumber one_v3 = AKrivoshein::LongNumber("-123");
+	AKrivoshein::LongNumber x("-1");
+	std::cout << x.get_digits_number();
+	//AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("123");
+	
 	
 	//AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("12");
 	//bool print = twelve < one_v1; // false
 	//std::cout << print;
-	//std::cout << one_v1 << "          " << one_v2 << "          " << one_v3  << "          " << one_v4;
-	std::cout << a << " " << b << " " << c << " " << d << " ";
+	//std::cout << one_v2 << "          " << one_v3 << "                    " << x;
+	//std::cout << x;
+	//std::cout << a << " " << b << " " << c << " " << d << " ";
 	return 0;
 }

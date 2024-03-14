@@ -12,7 +12,7 @@ TEST(get_digits_number, check_positive) {
 TEST(get_digits_number, check_negative) {
 	AKrivoshein::LongNumber x("-1");
 	ASSERT_EQ(1, x.get_digits_number())
-		<< "Неправильно подсчитано количество разрядов в числе " << x;
+		<< "Неправильно подсчитано количество разрядов в числе " << 123213;
 }
 
 //Tests of "=="
