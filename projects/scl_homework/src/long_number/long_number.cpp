@@ -277,7 +277,7 @@ namespace AKrivoshein {
 		
 		if (this->is_positive() && x.is_positive()) { // ++
 			result.sign_ = POSITIVE;
-			if (this->get_digits_number() >= x.get_digits_number()) {
+			if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
 				int tmp = 0;
 				//std::cout << "" << std::endl;
 				//std::cout << "IN THE ++" << std::endl;
@@ -287,12 +287,10 @@ namespace AKrivoshein {
 					int num = 0;
 					if (x.length_ - index <= -1) {
 						num = this->numbers_[this->length_ - index] + tmp;
-						//std::cout << "IN IF" << std::endl;
 
 					}
 					else {
 						num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
-						//std::cout << "IN ELSE" << std::endl;
 					}
 					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
 					tmp = 0;
@@ -300,13 +298,21 @@ namespace AKrivoshein {
 					//std::cout << "num: " << num << std::endl;
 					//std::cout << "this->numbers_[i] " << this->numbers_[this->length_ - index] << std::endl;
 					//std::cout << "x.numbers_[i] " << x.numbers_[x.length_ - index] <<  std::endl;
-					if (num > 9) {
+					if (num > 9 && (i - 1) <= 0) {
 						tmp = 1;
+						//std::cout << "IN IF" << std::endl;
+						interim_res[index - 1] = num;
+						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
+					}
+					else if (num > 9) {
+						tmp = 1;
+						//std::cout << "IN ELSE IF" << std::endl;
 						interim_res[index - 1] = num % 10;
 						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
 					}
 					else {
 						interim_res[index - 1] = num;
+						//std::cout << "IN ELSE" << std::endl;
 						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
 						//std::cout << "IN THE num <= 9" << std::endl;
 					}
@@ -316,6 +322,51 @@ namespace AKrivoshein {
 					//std::cout << "INDEX:" << index << std::endl;
 				}
 				
+				if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
+				int tmp = 0;
+				//std::cout << "" << std::endl;
+				//std::cout << "IN THE ++" << std::endl;
+				for (int i = this->length_; i > 0; i--) {
+					//interim_res[index - 1] = this->numbers_[i] + x.numbers_[i];
+					//int tmp = 0;
+					int num = 0;
+					if (x.length_ - index <= -1) {
+						num = this->numbers_[this->length_ - index] + tmp;
+
+					}
+					else {
+						num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
+					}
+					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
+					tmp = 0;
+					//std::cout  << "this->length_: " <<  this->length_  << " x.length_: " <<  x.length_ << std::endl;
+					//std::cout << "num: " << num << std::endl;
+					//std::cout << "this->numbers_[i] " << this->numbers_[this->length_ - index] << std::endl;
+					//std::cout << "x.numbers_[i] " << x.numbers_[x.length_ - index] <<  std::endl;
+					if (num > 9 && (i - 1) <= 0) {
+						tmp = 1;
+						//std::cout << "IN IF" << std::endl;
+						interim_res[index - 1] = num;
+						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
+					}
+					else if (num > 9) {
+						tmp = 1;
+						//std::cout << "IN ELSE IF" << std::endl;
+						interim_res[index - 1] = num % 10;
+						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
+					}
+					else {
+						interim_res[index - 1] = num;
+						//std::cout << "IN ELSE" << std::endl;
+						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
+						//std::cout << "IN THE num <= 9" << std::endl;
+					}
+					//result.numbers_[index] = 
+					
+					index++;
+					//std::cout << "INDEX:" << index << std::endl;
+				}
+
 				result.length_ = index - 1;
 				result.numbers_ = new int[index - 1];
 				int i = 0;
