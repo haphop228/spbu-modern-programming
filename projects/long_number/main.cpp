@@ -5,7 +5,7 @@ typedef AKrivoshein::LongNumber ln;
 
 int main(){
 	//std::cout<<"Hello World!";
-	char str[12] = "01234567891";
+	char str[12] = "-1234567891";
 	/*
 	for (int i = 0; i < 10; i++){
 		str[i] = ;
@@ -35,12 +35,23 @@ int main(){
 	}
 	*/
 	
-	ln a = "12";
-	ln b = "1";
+	ln a = str;
+	ln b;
+	b = AKrivoshein::LongNumber("-15");
+	ln c = "-123213213123213123123123123";
+	ln d;
+	d = b;
+	/*
 	AKrivoshein::LongNumber one_v1 = AKrivoshein::LongNumber("1");
-	AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("12");
-	bool print = twelve < one_v1; // false
-	std::cout << print;
-	//std::cout << a << " " << b << " " << c << " " << d << " " << e;
+	AKrivoshein::LongNumber one_v2 = AKrivoshein::LongNumber("-1");
+	AKrivoshein::LongNumber one_v3 = AKrivoshein::LongNumber("-123");
+	AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("123");
+	*/
+	
+	//AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("12");
+	//bool print = twelve < one_v1; // false
+	//std::cout << print;
+	//std::cout << one_v1 << "          " << one_v2 << "          " << one_v3  << "          " << one_v4;
+	std::cout << a << " " << b << " " << c << " " << d << " ";
 	return 0;
 }
