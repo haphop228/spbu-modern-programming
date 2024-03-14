@@ -47,10 +47,10 @@ int main(){
 	//AKrivoshein::LongNumber one_v3 = AKrivoshein::LongNumber("-123");
 	//AKrivoshein::LongNumber x("-1");
 	//std::cout << x.get_digits_number();
-	AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("12");
+	AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("1212");
 	
 	
-	AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("12");
+	AKrivoshein::LongNumber twelve = AKrivoshein::LongNumber("12222222");
 	//bool print = twelve < one_v1; // false
 	//std::cout << print;
 	//std::cout << one_v2 << "          " << one_v3 << "                    " << x;

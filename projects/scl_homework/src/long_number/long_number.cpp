@@ -322,20 +322,29 @@ namespace AKrivoshein {
 					//std::cout << "INDEX:" << index << std::endl;
 				}
 				
-				if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
+				result.length_ = index - 1;
+				result.numbers_ = new int[index - 1];
+				int i = 0;
+				while ((index - i) != 1) {
+					result.numbers_[index - i - 2] = interim_res[i];
+					//std::cout << "IN WHILE ID+EXEF: " << char(interim_res[i])  << " LOL "<< std::endl;
+					//std::cout<<result.numbers_[index - i] << std::endl;
+					i++;
+				}
+			}
+			
+			else if (this->get_digits_number() < x.get_digits_number()) { //Variant: first < second
 				int tmp = 0;
 				//std::cout << "" << std::endl;
-				//std::cout << "IN THE ++" << std::endl;
-				for (int i = this->length_; i > 0; i--) {
+				for (int i = x.length_; i > 0; i--) {
 					//interim_res[index - 1] = this->numbers_[i] + x.numbers_[i];
-					//int tmp = 0;
 					int num = 0;
-					if (x.length_ - index <= -1) {
-						num = this->numbers_[this->length_ - index] + tmp;
+					if (this->length_ - index <= -1) {
+						num = x.numbers_[x.length_ - index] + tmp;
 
 					}
 					else {
-						num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
+						num = x.numbers_[x.length_ - index] + this->numbers_[this->length_ - index] + tmp;
 					}
 					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
 					tmp = 0;
@@ -366,7 +375,7 @@ namespace AKrivoshein {
 					index++;
 					//std::cout << "INDEX:" << index << std::endl;
 				}
-
+				
 				result.length_ = index - 1;
 				result.numbers_ = new int[index - 1];
 				int i = 0;
@@ -376,13 +385,11 @@ namespace AKrivoshein {
 					//std::cout<<result.numbers_[index - i] << std::endl;
 					i++;
 				}
-				/*
-				for (int i = 0; i < index; i++) {
-					std::cout << char(interim_res[i]) << " ";
-				}
-				*/
-				
 			}
+			
+			
+			
+			
 			else {
 				
 			}
