@@ -31,11 +31,11 @@ namespace AKrivoshein {
 			bool operator < (const LongNumber& x) const;
 			
 			
-			LongNumber operator + (const LongNumber& x);
-			LongNumber operator - (const LongNumber& x);
-			LongNumber operator * (const LongNumber& x);
-			LongNumber operator / (const LongNumber& x);
-			LongNumber operator % (const LongNumber& x);
+			LongNumber operator + (const LongNumber& x) const;
+			LongNumber operator - (const LongNumber& x) const;
+			LongNumber operator * (const LongNumber& x) const;
+			LongNumber operator / (const LongNumber& x) const;
+			LongNumber operator % (const LongNumber& x) const;
 			
 			int get_digits_number() const;
 			bool is_positive() const;

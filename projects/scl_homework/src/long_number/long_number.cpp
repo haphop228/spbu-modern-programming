@@ -6,8 +6,9 @@ namespace AKrivoshein {
 	// DONE
 	// ----------------------------------------------------------
 	LongNumber::LongNumber() {
+		//std::cout << "Default constructor" << std::endl;
 		//std::cout << "2" << std::endl;
-		numbers_ = new int [0];
+		numbers_ = nullptr;
 		length_ = 0;
 		sign_ = POSITIVE;
 	}
@@ -18,8 +19,8 @@ namespace AKrivoshein {
 		length_ = 0;
 		
 		if (str[0] == '-') {
+			
 			while(str[i + 1] != '\0') {
-				//std::cout<<char(str[i + 1]) << " ";
 				sign_ = NEGATIVE;
 				length_++;
 				i++;
@@ -27,43 +28,28 @@ namespace AKrivoshein {
 		}
 		else {
 			while(str[i] != '\0') {
-				//std::cout<< char(str[i]) << " ";
 				sign_ = POSITIVE;
 				length_++;
 				i++;
 			}
 		}
-		
-		/*
-		if (str[0] == '-') {
-			sign_ = NEGATIVE;
-		}
-		else {
-			sign_ = POSITIVE;
-		}
-		*/
-		//std::cout << "" << std::endl;
+		//std::cout << "LENGTH: " <<length_<<std::endl;
 
-		//std::cout<< "FROM CWP sign: " << sign_ << std::endl;
-		//std::cout<< "FROM CWP length: " << length_ << std::endl;
-		//std::cout<< std::endl;
-		//std::cout<< "FROM CLASS: " << sign << std::endl;
 		numbers_ = new int [length_];
 		if (sign_ == NEGATIVE) {
 			for (int i = 0; i < length_; i++) {
-				//std::cout << "in FOR" << std::endl;
-				numbers_[i] = str[i + 1] - 48; // -48 because of ACII 
+				numbers_[i] = str[i + 1] - '0'; // -'0' because of ACII 
 			}
 		}
 		else {
 			for (int i = 0; i < length_; i++) {
-				//std::cout << "in FOR" << std::endl;
-				numbers_[i] = str[i] - 48; // -48 because of ACII 
+				numbers_[i] = str[i] - '0'; // -'0' because of ACII 
 			}
 		}
 	}
 	
 	LongNumber::LongNumber(const LongNumber& x) {
+	///	std::cout << "Constructor copy" << std::endl;
 		length_ = x.length_;
 		sign_ = x.sign_;
 		numbers_ = new int[x.length_];
@@ -73,13 +59,12 @@ namespace AKrivoshein {
 	}
 	
 	LongNumber::LongNumber(LongNumber&& x) {
+		//std::cout << "Constructor move" << std::endl;
 		//Create new 
 		length_ = x.length_;
 		sign_ = x.sign_;
-		numbers_ = new int[x.length_];
-		for (int i = 0; i < length_; i++){
-			numbers_[i] = x.numbers_[i];
-		}
+		numbers_ = x.numbers_;
+		
 		//Delete old
 		x.length_ = 0;
 		x.sign_ = POSITIVE;
@@ -87,10 +72,12 @@ namespace AKrivoshein {
 	}
 	
 	LongNumber::~LongNumber() {
+	//	std::cout << "destructor" << std::endl;
 		delete [] numbers_;
 	}
 	
 	LongNumber& LongNumber::operator = (const char* const str) {
+		//std::cout << "hgddgfhfhfffgfffhfhfhOperator move" << std::endl;
 		int i = 0;
 		length_ = 0;
 		
@@ -116,6 +103,7 @@ namespace AKrivoshein {
 	}
 	
 	LongNumber& LongNumber::operator = (const LongNumber& x) {
+		//std::cout << "Operator copy" << std::endl;
 		length_ = x.length_;
 		sign_ = x.sign_;
 		numbers_ = new int[x.length_];
@@ -126,14 +114,13 @@ namespace AKrivoshein {
 	}
 	
 	LongNumber& LongNumber::operator = (LongNumber&& x) {
+	//	std::cout << "Operator move" << std::endl;
 		//Create new 
 		//std::cout << "2" << std::endl;
 		length_ = x.length_;
 		sign_ = x.sign_;
-		numbers_ = new int[x.length_];
-		for (int i = 0; i < length_; i++){
-			numbers_[i] = x.numbers_[i];
-		}
+		numbers_ = x.numbers_;
+
 		//Delete old
 		x.length_ = 0;
 		x.sign_ = POSITIVE;
@@ -265,10 +252,9 @@ namespace AKrivoshein {
 	// NOT DONE
 	// ----------------------------------------------------------
 	
-	LongNumber LongNumber::operator + (const LongNumber& x) {
+	LongNumber LongNumber::operator + (const LongNumber& x) const {
 		//Three variants: ++, +-, --
 		
-
 		LongNumber result;
 		result.numbers_ = new int[0];
 		result.length_ = 0;
@@ -277,129 +263,87 @@ namespace AKrivoshein {
 		
 		if (this->is_positive() && x.is_positive()) { // ++
 			result.sign_ = POSITIVE;
-			if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
-				int tmp = 0;
-				//std::cout << "" << std::endl;
-				//std::cout << "IN THE ++" << std::endl;
-				for (int i = this->length_; i > 0; i--) {
-					//interim_res[index - 1] = this->numbers_[i] + x.numbers_[i];
-					//int tmp = 0;
-					int num = 0;
-					if (x.length_ - index <= -1) {
-						num = this->numbers_[this->length_ - index] + tmp;
-
-					}
-					else {
-						num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
-					}
-					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
-					tmp = 0;
-					//std::cout  << "this->length_: " <<  this->length_  << " x.length_: " <<  x.length_ << std::endl;
-					//std::cout << "num: " << num << std::endl;
-					//std::cout << "this->numbers_[i] " << this->numbers_[this->length_ - index] << std::endl;
-					//std::cout << "x.numbers_[i] " << x.numbers_[x.length_ - index] <<  std::endl;
-					if (num > 9 && (i - 1) <= 0) {
-						tmp = 1;
-						//std::cout << "IN IF" << std::endl;
-						interim_res[index - 1] = num;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-					}
-					else if (num > 9) {
-						tmp = 1;
-						//std::cout << "IN ELSE IF" << std::endl;
-						interim_res[index - 1] = num % 10;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-					}
-					else {
-						interim_res[index - 1] = num;
-						//std::cout << "IN ELSE" << std::endl;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-						//std::cout << "IN THE num <= 9" << std::endl;
-					}
-					//result.numbers_[index] = 
-					
-					index++;
-					//std::cout << "INDEX:" << index << std::endl;
-				}
-				
-				result.length_ = index - 1;
-				result.numbers_ = new int[index - 1];
-				int i = 0;
-				while ((index - i) != 1) {
-					result.numbers_[index - i - 2] = interim_res[i];
-					//std::cout << "IN WHILE ID+EXEF: " << char(interim_res[i])  << " LOL "<< std::endl;
-					//std::cout<<result.numbers_[index - i] << std::endl;
-					i++;
-				}
-			}
-			
-			else if (this->get_digits_number() < x.get_digits_number()) { //Variant: first < second
-				int tmp = 0;
-				//std::cout << "" << std::endl;
-				for (int i = x.length_; i > 0; i--) {
-					//interim_res[index - 1] = this->numbers_[i] + x.numbers_[i];
-					int num = 0;
-					if (this->length_ - index <= -1) {
-						num = x.numbers_[x.length_ - index] + tmp;
-
-					}
-					else {
-						num = x.numbers_[x.length_ - index] + this->numbers_[this->length_ - index] + tmp;
-					}
-					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
-					tmp = 0;
-					//std::cout  << "this->length_: " <<  this->length_  << " x.length_: " <<  x.length_ << std::endl;
-					//std::cout << "num: " << num << std::endl;
-					//std::cout << "this->numbers_[i] " << this->numbers_[this->length_ - index] << std::endl;
-					//std::cout << "x.numbers_[i] " << x.numbers_[x.length_ - index] <<  std::endl;
-					if (num > 9 && (i - 1) <= 0) {
-						tmp = 1;
-						//std::cout << "IN IF" << std::endl;
-						interim_res[index - 1] = num;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-					}
-					else if (num > 9) {
-						tmp = 1;
-						//std::cout << "IN ELSE IF" << std::endl;
-						interim_res[index - 1] = num % 10;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-					}
-					else {
-						interim_res[index - 1] = num;
-						//std::cout << "IN ELSE" << std::endl;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-						//std::cout << "IN THE num <= 9" << std::endl;
-					}
-					//result.numbers_[index] = 
-					
-					index++;
-					//std::cout << "INDEX:" << index << std::endl;
-				}
-				
-				result.length_ = index - 1;
-				result.numbers_ = new int[index - 1];
-				int i = 0;
-				while ((index - i) != 1) {
-					result.numbers_[index - i - 2] = interim_res[i];
-					//std::cout << "IN WHILE ID+EXEF: " << char(interim_res[i])  << " LOL "<< std::endl;
-					//std::cout<<result.numbers_[index - i] << std::endl;
-					i++;
-				}
-			}
-
 		}
-		else if (this->is_positive() && !x.is_positive()) { // +-
+		else if (!this->is_positive() && !x.is_positive()) { // --
+			result.sign_ = NEGATIVE;
+		}
+		if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
+			int tmp = 0;
+			for (int i = this->length_; i > 0; i--) {
+				int num = 0;
+				if (x.length_ - index <= -1) {
+					num = this->numbers_[this->length_ - index] + tmp;
+
+				}
+				else {
+					num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
+				}
+				tmp = 0;
+				if (num > 9 && (i - 1) <= 0) {
+					tmp = 1;
+					interim_res[index - 1] = num;
+				}
+				else if (num > 9) {
+					tmp = 1;
+					interim_res[index - 1] = num % 10;
+				}
+				else {
+					interim_res[index - 1] = num;
+				}
+				index++;
+			}
 			
+			result.length_ = index - 1;
+			result.numbers_ = new int[index - 1];
+			int i = 0;
+			while ((index - i) != 1) {
+				result.numbers_[index - i - 2] = interim_res[i];
+				i++;
+			}
+		}
+		
+		else if (this->get_digits_number() < x.get_digits_number()) { //Variant: first < second
+			int tmp = 0;
+			for (int i = x.length_; i > 0; i--) {
+				int num = 0;
+				if (this->length_ - index <= -1) {
+					num = x.numbers_[x.length_ - index] + tmp;
+
+				}
+				else {
+					num = x.numbers_[x.length_ - index] + this->numbers_[this->length_ - index] + tmp;
+				}
+				tmp = 0;
+				if (num > 9 && (i - 1) <= 0) {
+					tmp = 1;
+					interim_res[index - 1] = num;
+				}
+				else if (num > 9) {
+					tmp = 1;
+					interim_res[index - 1] = num % 10;
+				}
+				else {
+					interim_res[index - 1] = num;
+				}
+				index++;
+			}
+			
+			result.length_ = index - 1;
+			result.numbers_ = new int[index - 1];
+			int i = 0;
+			while ((index - i) != 1) {
+				result.numbers_[index - i - 2] = interim_res[i];
+				i++;
+			}
+		}
+		/*
+		else if (this->is_positive() && !x.is_positive()) { // +-			
 		}
 		else { // --
 			result.sign_ = NEGATIVE;
 			if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
 				int tmp = 0;
-				//std::cout << "" << std::endl;
-				//std::cout << "IN THE ++" << std::endl;
 				for (int i = this->length_; i > 0; i--) {
-					//interim_res[index - 1] = this->numbers_[i] + x.numbers_[i];
-					//int tmp = 0;
 					int num = 0;
 					if (x.length_ - index <= -1) {
 						num = this->numbers_[this->length_ - index] + tmp;
@@ -408,34 +352,19 @@ namespace AKrivoshein {
 					else {
 						num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
 					}
-					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
 					tmp = 0;
-					//std::cout  << "this->length_: " <<  this->length_  << " x.length_: " <<  x.length_ << std::endl;
-					//std::cout << "num: " << num << std::endl;
-					//std::cout << "this->numbers_[i] " << this->numbers_[this->length_ - index] << std::endl;
-					//std::cout << "x.numbers_[i] " << x.numbers_[x.length_ - index] <<  std::endl;
 					if (num > 9 && (i - 1) <= 0) {
 						tmp = 1;
-						//std::cout << "IN IF" << std::endl;
 						interim_res[index - 1] = num;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
 					}
 					else if (num > 9) {
 						tmp = 1;
-						//std::cout << "IN ELSE IF" << std::endl;
 						interim_res[index - 1] = num % 10;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
 					}
 					else {
 						interim_res[index - 1] = num;
-						//std::cout << "IN ELSE" << std::endl;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-						//std::cout << "IN THE num <= 9" << std::endl;
 					}
-					//result.numbers_[index] = 
-					
 					index++;
-					//std::cout << "INDEX:" << index << std::endl;
 				}
 				
 				result.length_ = index - 1;
@@ -443,17 +372,13 @@ namespace AKrivoshein {
 				int i = 0;
 				while ((index - i) != 1) {
 					result.numbers_[index - i - 2] = interim_res[i];
-					//std::cout << "IN WHILE ID+EXEF: " << char(interim_res[i])  << " LOL "<< std::endl;
-					//std::cout<<result.numbers_[index - i] << std::endl;
 					i++;
 				}
 			}
 			
 			else if (this->get_digits_number() < x.get_digits_number()) { //Variant: first < second
 				int tmp = 0;
-				//std::cout << "" << std::endl;
 				for (int i = x.length_; i > 0; i--) {
-					//interim_res[index - 1] = this->numbers_[i] + x.numbers_[i];
 					int num = 0;
 					if (this->length_ - index <= -1) {
 						num = x.numbers_[x.length_ - index] + tmp;
@@ -462,34 +387,19 @@ namespace AKrivoshein {
 					else {
 						num = x.numbers_[x.length_ - index] + this->numbers_[this->length_ - index] + tmp;
 					}
-					//std::cout <<  " (this->length_ - index): " << this->length_ - index << " (x.length_ - index): " << x.length_ - index << std::endl;
 					tmp = 0;
-					//std::cout  << "this->length_: " <<  this->length_  << " x.length_: " <<  x.length_ << std::endl;
-					//std::cout << "num: " << num << std::endl;
-					//std::cout << "this->numbers_[i] " << this->numbers_[this->length_ - index] << std::endl;
-					//std::cout << "x.numbers_[i] " << x.numbers_[x.length_ - index] <<  std::endl;
 					if (num > 9 && (i - 1) <= 0) {
 						tmp = 1;
-						//std::cout << "IN IF" << std::endl;
 						interim_res[index - 1] = num;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
 					}
 					else if (num > 9) {
 						tmp = 1;
-						//std::cout << "IN ELSE IF" << std::endl;
 						interim_res[index - 1] = num % 10;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
 					}
 					else {
 						interim_res[index - 1] = num;
-						//std::cout << "IN ELSE" << std::endl;
-						//std::cout <<  "interim_res[index - 1]: " << interim_res[index - 1] << std::endl;
-						//std::cout << "IN THE num <= 9" << std::endl;
 					}
-					//result.numbers_[index] = 
-					
 					index++;
-					//std::cout << "INDEX:" << index << std::endl;
 				}
 				
 				result.length_ = index - 1;
@@ -497,37 +407,35 @@ namespace AKrivoshein {
 				int i = 0;
 				while ((index - i) != 1) {
 					result.numbers_[index - i - 2] = interim_res[i];
-					//std::cout << "IN WHILE ID+EXEF: " << char(interim_res[i])  << " LOL "<< std::endl;
-					//std::cout<<result.numbers_[index - i] << std::endl;
 					i++;
 				}
 			}
-
+			
 		}
+		*/
 		
-		//std::cout << "SIGN: "<< result.sign_ << std::endl;
 		return result;
 	}
 	
-	LongNumber LongNumber::operator - (const LongNumber& x) {
+	LongNumber LongNumber::operator - (const LongNumber& x) const {
 		// TODO
 		LongNumber result = x;
 		return result;
 	}
 	
-	LongNumber LongNumber::operator * (const LongNumber& x) {
+	LongNumber LongNumber::operator * (const LongNumber& x) const {
 		// TODO
 		LongNumber result;
 		return result;
 	}
 	
-	LongNumber LongNumber::operator / (const LongNumber& x) {
+	LongNumber LongNumber::operator / (const LongNumber& x) const {
 		// TODO
 		LongNumber result;
 		return result;
 	}
 	
-	LongNumber LongNumber::operator % (const LongNumber& x) {
+	LongNumber LongNumber::operator % (const LongNumber& x) const {
 		// TODO
 		LongNumber result;
 		return result;
@@ -556,7 +464,6 @@ namespace AKrivoshein {
 	// ----------------------------------------------------------
 	std::ostream& operator << (std::ostream &os, const LongNumber& x) {
 		if (!x.is_positive()){
-			//std::cout << " asdadsad" << std::endl;
 			os << '-';
 		}
 		for (int i = 0; i < x.length_; i++){
