@@ -256,6 +256,102 @@ namespace AKrivoshein {
 		result.length_ = 0;
 		int index = 1;
 		//int* interim_res = new int[index];
+		int this_length_ = this->get_digits_number();
+		int x_length_ = x.get_digits_number();
+		int max_length_;
+		int min_length_;
+		int future_length = 0;
+		LongNumber this_clone = *this;
+		LongNumber x_clone = x;
+		this_clone.sign_ = POSITIVE;
+		x_clone.sign_ = POSITIVE;
+		
+		if (this_length_ > x_length_) {
+			max_length_ = this_length_;
+			min_length_ = x_length_;
+		}
+		else {
+			max_length_ = x_length_;
+		    min_length_ = this_length_;
+		}
+		
+		int between_length_ = max_length_ - min_length_; //промежуточная длина, т.е. разница между большей длиной и меньшй
+		int ind = 0;
+		if (this->is_positive() && !x.is_positive()) { // -+
+			int counter = 0;
+			int* interim_res = new int[max_length_];
+			for (int i = 0; i < max_length_; i++) { //Fill array with nules
+				interim_res[i] = 0;
+			}
+			if (this_clone == x_clone) {
+				result.sign_ = POSITIVE;
+				result.length_ = 1;
+				result.numbers_ = new int[1];
+				result.numbers_[0] = 0;
+				return result;
+			}
+			else if (this_clone < x_clone) { // abs(this) < abs(x)
+				for (int i = this_length_; i > 0; i--) {
+					int num = 0;
+					num = x.numbers_[x_length_ - 1 - counter] - this->numbers_[this_length_ - 1 - counter];
+					if (num < 0) {
+						num = 10 + num;
+						x.numbers_[x_length_ - 2 - counter + 1] - 1;
+					}
+					interim_res[x_length_ - 1 - counter] = num;
+					//std::cout  << "NUM: " << num <<std::endl;
+					//std::cout<< "LLL: " << x_length_ - 1 - counter << std::endl; 
+					future_length++;
+					counter++;
+				}
+				
+				for(int i = 0; i< between_length_; i++) {
+					interim_res[i] = x.numbers_[i];
+					future_length++;
+				}
+			}
+			else { // abs(this) > abs(x) 
+				for (int i = this_length_; i > 0; i--) {
+					int num = 0;
+					num = x.numbers_[x_length_ - 1 - counter] - this->numbers_[this_length_ - 1 - counter];
+					if (num < 0) {
+						num = 10 + num;
+						x.numbers_[x_length_ - 2 - counter + 1] - 1;
+					}
+					interim_res[x_length_ - 1 - counter] = num;
+					//std::cout  << "NUM: " << num <<std::endl;
+					//std::cout<< "LLL: " << x_length_ - 1 - counter << std::endl; 
+					future_length++;
+					counter++;
+				}
+				
+				for(int i = 0; i< between_length_; i++) {
+					interim_res[i] = x.numbers_[i];
+					future_length++;
+				}
+			}
+			
+			
+			
+			/*
+			int i = interim_res;
+			while (i == 0) {
+				
+			}
+			
+			for (int i = 0; i < max_length_; i++) {
+				std::cout<<interim_res[i]<< " ";
+				
+			}*/
+			result.sign_= NEGATIVE;
+			result.length_ = future_length;
+			result.numbers_ = interim_res;
+			return result;
+		}
+		else if (!this->is_positive() && x.is_positive()) { // -+
+			
+			return result;
+		}
 		
 		if (this->is_positive() && x.is_positive()) { // ++
 			result.sign_ = POSITIVE;
@@ -348,8 +444,9 @@ namespace AKrivoshein {
 	}
 	
 	LongNumber LongNumber::operator - (const LongNumber& x) const {
-		// TODO
-		LongNumber result = x;
+		//Variant +-
+		
+		LongNumber result;
 		return result;
 	}
 	
