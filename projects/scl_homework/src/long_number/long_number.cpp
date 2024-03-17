@@ -255,7 +255,7 @@ namespace AKrivoshein {
 		result.numbers_ = new int[0];
 		result.length_ = 0;
 		int index = 1;
-		int* interim_res = new int[index];
+		//int* interim_res = new int[index];
 		
 		if (this->is_positive() && x.is_positive()) { // ++
 			result.sign_ = POSITIVE;
@@ -263,19 +263,25 @@ namespace AKrivoshein {
 		else if (!this->is_positive() && !x.is_positive()) { // --
 			result.sign_ = NEGATIVE;
 		}
-		if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
+		if (this->get_digits_number() >= x.get_digits_number()) { //Variant: this >= x
+		    int* interim_res = new int[this->get_digits_number() + 1]; //Memory (max + 1)
+			for (int i = 0; i < this->get_digits_number() + 1; i++) { //Fill array with nules
+				interim_res[i] = 0;
+			}
 			int tmp = 0;
 			for (int i = this->length_; i > 0; i--) {
 				int num = 0;
-				if (x.length_ - index <= -1) {
+				//Found num
+				if (x.length_ - index <= -1) { 
 					num = this->numbers_[this->length_ - index] + tmp;
-
 				}
 				else {
 					num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
 				}
+				
 				tmp = 0;
-				if (num > 9 && (i - 1) <= 0) {
+				//Fill interim_res with num
+				if (num > 9 && (i - 1) <= 0) { //if num>9 and it's not last iteration
 					tmp = 1;
 					interim_res[index - 1] = num;
 				}
@@ -283,7 +289,7 @@ namespace AKrivoshein {
 					tmp = 1;
 					interim_res[index - 1] = num % 10;
 				}
-				else {
+				else { //last iteration
 					interim_res[index - 1] = num;
 				}
 				index++;
@@ -298,8 +304,13 @@ namespace AKrivoshein {
 			}
 		}
 		
-		else if (this->get_digits_number() < x.get_digits_number()) { //Variant: first < second
+		else if (this->get_digits_number() < x.get_digits_number()) { //Variant: this < x
+			int* interim_res = new int[x.get_digits_number() + 1];
+			for (int i = 0; i < x.get_digits_number() + 1; i++) { //Fill array with nules
+				interim_res[i] = 0;
+			}
 			int tmp = 0;
+			//Find num
 			for (int i = x.length_; i > 0; i--) {
 				int num = 0;
 				if (this->length_ - index <= -1) {
@@ -310,7 +321,8 @@ namespace AKrivoshein {
 					num = x.numbers_[x.length_ - index] + this->numbers_[this->length_ - index] + tmp;
 				}
 				tmp = 0;
-				if (num > 9 && (i - 1) <= 0) {
+				//Fill interim_res with num
+				if (num > 9 && (i - 1) <= 0) { //if num>9 and it's not last iteration
 					tmp = 1;
 					interim_res[index - 1] = num;
 				}
@@ -318,7 +330,7 @@ namespace AKrivoshein {
 					tmp = 1;
 					interim_res[index - 1] = num % 10;
 				}
-				else {
+				else { //last iteration
 					interim_res[index - 1] = num;
 				}
 				index++;
