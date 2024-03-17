@@ -17,9 +17,9 @@ int main(){
 	int i = 0;
 	
 	//AKrivoshein::LongNumber one_v4 = AKrivoshein::LongNumber("-1");
-	ln a("321");
-	ln b("-321");
-	ln c = a+b;
+	ln a("12");
+	ln b("1");
+	ln c = b - a;
 	std::cout << c;
 	//int x(5);
 	//int x = 5;

@@ -277,26 +277,32 @@ namespace AKrivoshein {
 		
 		int between_length_ = max_length_ - min_length_; //промежуточная длина, т.е. разница между большей длиной и меньшй
 		int ind = 0;
-		if (this->is_positive() && !x.is_positive()) { // -+
+		
+		if (this->is_positive() && !x.is_positive()) { // +-
 			int counter = 0;
 			int* interim_res = new int[max_length_];
 			for (int i = 0; i < max_length_; i++) { //Fill array with nules
 				interim_res[i] = 0;
 			}
-			if (this_clone == x_clone) {
+			if (this_clone == x_clone) { // this == x
 				result.sign_ = POSITIVE;
 				result.length_ = 1;
 				result.numbers_ = new int[1];
 				result.numbers_[0] = 0;
 				return result;
 			}
-			else if (this_clone < x_clone) { // abs(this) < abs(x)
+			else if (this_clone < x_clone) { // abs(this) < abs(x) 
+			//	std::cout << "1";
 				for (int i = this_length_; i > 0; i--) {
 					int num = 0;
 					num = x.numbers_[x_length_ - 1 - counter] - this->numbers_[this_length_ - 1 - counter];
+					//std::cout << "I: " << i << " NUM: " << num << "ENDD: " << x.numbers_[x_length_ - 1 - counter] << std::endl;
 					if (num < 0) {
 						num = 10 + num;
-						x.numbers_[x_length_ - 2 - counter + 1] - 1;
+					//	std:: cout << x.numbers_[x_length_ - 1 - counter + 1] << std::endl;
+						x.numbers_[x_length_ - 2 - counter] -= 1;
+					//	std:: cout << x.numbers_[x_length_ - 1 - counter + 1] << std::endl;
+
 					}
 					interim_res[x_length_ - 1 - counter] = num;
 					//std::cout  << "NUM: " << num <<std::endl;
@@ -309,45 +315,55 @@ namespace AKrivoshein {
 					interim_res[i] = x.numbers_[i];
 					future_length++;
 				}
+				result.sign_ = NEGATIVE;
 			}
 			else { // abs(this) > abs(x) 
-				for (int i = this_length_; i > 0; i--) {
+				for (int i = x.length_; i > 0; i--) {
 					int num = 0;
-					num = x.numbers_[x_length_ - 1 - counter] - this->numbers_[this_length_ - 1 - counter];
+					num = this->numbers_[this->length_ - 1 - counter] - x.numbers_[x_length_ - 1 - counter];
 					if (num < 0) {
 						num = 10 + num;
-						x.numbers_[x_length_ - 2 - counter + 1] - 1;
+						//std::cout  << "THIRD ITERATION: " << std::endl; 
+						//this->numbers_[this_length_ - 3 - counter + 1] - 1;
+						this->numbers_[this_length_ - 2 - counter] -= 1;
+						//std::cout << this->numbers_[this_length_ - 3 - counter + 1] - 1<< "  INDEX: " << this_length_ - 3 - counter + 1 << std::endl;
 					}
-					interim_res[x_length_ - 1 - counter] = num;
+					interim_res[this_length_ - 1 - counter] = num;
 					//std::cout  << "NUM: " << num <<std::endl;
 					//std::cout<< "LLL: " << x_length_ - 1 - counter << std::endl; 
+					//std::cout << "SHIT: " << this->numbers_[0]<< " "<< std::endl;
 					future_length++;
 					counter++;
 				}
 				
-				for(int i = 0; i< between_length_; i++) {
-					interim_res[i] = x.numbers_[i];
+				for(int i = 0; i < between_length_; i++) {
+					interim_res[i] = this->numbers_[i];
+					//std::cout << "RES: " << this->numbers_[i] << " "<< std::endl;
 					future_length++;
 				}
-			}
-			
-			
-			
-			/*
-			int i = interim_res;
-			while (i == 0) {
-				
+				result.sign_= POSITIVE;
 			}
 			
 			for (int i = 0; i < max_length_; i++) {
-				std::cout<<interim_res[i]<< " ";
+				//std::cout << interim_res[i] << " ";
 				
-			}*/
-			result.sign_= NEGATIVE;
-			result.length_ = future_length;
-			result.numbers_ = interim_res;
-			return result;
+			}
+			if (interim_res[0] == 0) {
+				result.length_ = future_length - 1;
+				for (int i = 0; i < result.length_; i++){
+					result.numbers_[i] = interim_res[i + 1];
+				}
+				return result;
+				
+			}
+			else {
+				result.length_ = future_length;
+				result.numbers_ = interim_res;
+				return result;
+			}
 		}
+		
+		
 		else if (!this->is_positive() && x.is_positive()) { // -+
 			
 			return result;
@@ -444,10 +460,116 @@ namespace AKrivoshein {
 	}
 	
 	LongNumber LongNumber::operator - (const LongNumber& x) const {
-		//Variant +-
-		
 		LongNumber result;
-		return result;
+		result.numbers_ = new int[0];
+		result.length_ = 0;
+		
+		int this_length_ = this->get_digits_number();
+		int x_length_ = x.get_digits_number();
+		int max_length_;
+		int min_length_;
+		int future_length = 0;
+		
+		LongNumber this_clone = *this;
+		LongNumber x_clone = x;
+		this_clone.sign_ = POSITIVE;
+		x_clone.sign_ = POSITIVE;
+		
+		if (this_length_ > x_length_) {
+			max_length_ = this_length_;
+			min_length_ = x_length_;
+		}
+		else {
+			max_length_ = x_length_;
+		    min_length_ = this_length_;
+		}
+		
+		int between_length_ = max_length_ - min_length_; //промежуточная длина, т.е. разница между большей длиной и меньшй
+		
+		//if (this->is_positive() && !x.is_positive()) { // +-
+			int counter = 0;
+			int* interim_res = new int[max_length_];
+			for (int i = 0; i < max_length_; i++) { //Fill array with nules
+				interim_res[i] = 0;
+			}
+			if (this_clone == x_clone) { // this == x
+				result.sign_ = POSITIVE;
+				result.length_ = 1;
+				result.numbers_ = new int[1];
+				result.numbers_[0] = 0;
+				return result;
+			}
+			else if (this_clone < x_clone) { // abs(this) < abs(x) 
+			//	std::cout << "1";
+				for (int i = this_length_; i > 0; i--) {
+					int num = 0;
+					num = x.numbers_[x_length_ - 1 - counter] - this->numbers_[this_length_ - 1 - counter];
+					//std::cout << "I: " << i << " NUM: " << num << "ENDD: " << x.numbers_[x_length_ - 1 - counter] << std::endl;
+					if (num < 0) {
+						num = 10 + num;
+					//	std:: cout << x.numbers_[x_length_ - 1 - counter + 1] << std::endl;
+						x.numbers_[x_length_ - 2 - counter] -= 1;
+					//	std:: cout << x.numbers_[x_length_ - 1 - counter + 1] << std::endl;
+
+					}
+					interim_res[x_length_ - 1 - counter] = num;
+					//std::cout  << "NUM: " << num <<std::endl;
+					//std::cout<< "LLL: " << x_length_ - 1 - counter << std::endl; 
+					future_length++;
+					counter++;
+				}
+				
+				for(int i = 0; i< between_length_; i++) {
+					interim_res[i] = x.numbers_[i];
+					future_length++;
+				}
+				result.sign_ = NEGATIVE;
+			}
+			else { // abs(this) > abs(x) 
+				for (int i = x.length_; i > 0; i--) {
+					int num = 0;
+					num = this->numbers_[this->length_ - 1 - counter] - x.numbers_[x_length_ - 1 - counter];
+					if (num < 0) {
+						num = 10 + num;
+						//std::cout  << "THIRD ITERATION: " << std::endl; 
+						//this->numbers_[this_length_ - 3 - counter + 1] - 1;
+						this->numbers_[this_length_ - 2 - counter] -= 1;
+						//std::cout << this->numbers_[this_length_ - 3 - counter + 1] - 1<< "  INDEX: " << this_length_ - 3 - counter + 1 << std::endl;
+					}
+					interim_res[this_length_ - 1 - counter] = num;
+					//std::cout  << "NUM: " << num <<std::endl;
+					//std::cout<< "LLL: " << x_length_ - 1 - counter << std::endl; 
+					//std::cout << "SHIT: " << this->numbers_[0]<< " "<< std::endl;
+					future_length++;
+					counter++;
+				}
+				
+				for(int i = 0; i < between_length_; i++) {
+					interim_res[i] = this->numbers_[i];
+					//std::cout << "RES: " << this->numbers_[i] << " "<< std::endl;
+					future_length++;
+				}
+				result.sign_= POSITIVE;
+			}
+			
+			for (int i = 0; i < max_length_; i++) {
+				//std::cout << interim_res[i] << " ";
+				
+			}
+			if (interim_res[0] == 0) {
+				result.length_ = future_length - 1;
+				for (int i = 0; i < result.length_; i++){
+					result.numbers_[i] = interim_res[i + 1];
+				}
+				return result;
+				
+			}
+			else {
+				result.length_ = future_length;
+				result.numbers_ = interim_res;
+				return result;
+			}
+			return result;
 	}
 	
 	LongNumber LongNumber::operator * (const LongNumber& x) const {
