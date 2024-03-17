@@ -19,7 +19,6 @@ namespace AKrivoshein {
 		length_ = 0;
 		
 		if (str[0] == '-') {
-			
 			while(str[i + 1] != '\0') {
 				sign_ = NEGATIVE;
 				length_++;
@@ -86,7 +85,6 @@ namespace AKrivoshein {
 			i++;
 		}
 
-		//std::cout<< "FROM CLASS: " << length << std::endl;
 		if (str[0] == '-') {
 			sign_ = NEGATIVE;
 		}
@@ -94,7 +92,6 @@ namespace AKrivoshein {
 			sign_ = POSITIVE;
 		}
 		
-		//std::cout<< "FROM CLASS: " << sign << std::endl;
 		numbers_ = new int [length_];
 		for (int i = 0; i < length_; i++) {
 			numbers_[i] = str[i];
@@ -116,7 +113,6 @@ namespace AKrivoshein {
 	LongNumber& LongNumber::operator = (LongNumber&& x) {
 	//	std::cout << "Operator move" << std::endl;
 		//Create new 
-		//std::cout << "2" << std::endl;
 		length_ = x.length_;
 		sign_ = x.sign_;
 		numbers_ = x.numbers_;
@@ -336,84 +332,6 @@ namespace AKrivoshein {
 				i++;
 			}
 		}
-		/*
-		else if (this->is_positive() && !x.is_positive()) { // +-			
-		}
-		else { // --
-			result.sign_ = NEGATIVE;
-			if (this->get_digits_number() >= x.get_digits_number()) { //Variant: first >= second
-				int tmp = 0;
-				for (int i = this->length_; i > 0; i--) {
-					int num = 0;
-					if (x.length_ - index <= -1) {
-						num = this->numbers_[this->length_ - index] + tmp;
-
-					}
-					else {
-						num = this->numbers_[this->length_ - index] + x.numbers_[x.length_ - index] + tmp;
-					}
-					tmp = 0;
-					if (num > 9 && (i - 1) <= 0) {
-						tmp = 1;
-						interim_res[index - 1] = num;
-					}
-					else if (num > 9) {
-						tmp = 1;
-						interim_res[index - 1] = num % 10;
-					}
-					else {
-						interim_res[index - 1] = num;
-					}
-					index++;
-				}
-				
-				result.length_ = index - 1;
-				result.numbers_ = new int[index - 1];
-				int i = 0;
-				while ((index - i) != 1) {
-					result.numbers_[index - i - 2] = interim_res[i];
-					i++;
-				}
-			}
-			
-			else if (this->get_digits_number() < x.get_digits_number()) { //Variant: first < second
-				int tmp = 0;
-				for (int i = x.length_; i > 0; i--) {
-					int num = 0;
-					if (this->length_ - index <= -1) {
-						num = x.numbers_[x.length_ - index] + tmp;
-
-					}
-					else {
-						num = x.numbers_[x.length_ - index] + this->numbers_[this->length_ - index] + tmp;
-					}
-					tmp = 0;
-					if (num > 9 && (i - 1) <= 0) {
-						tmp = 1;
-						interim_res[index - 1] = num;
-					}
-					else if (num > 9) {
-						tmp = 1;
-						interim_res[index - 1] = num % 10;
-					}
-					else {
-						interim_res[index - 1] = num;
-					}
-					index++;
-				}
-				
-				result.length_ = index - 1;
-				result.numbers_ = new int[index - 1];
-				int i = 0;
-				while ((index - i) != 1) {
-					result.numbers_[index - i - 2] = interim_res[i];
-					i++;
-				}
-			}
-			
-		}
-		*/
-		
 		return result;
 	}
 	
