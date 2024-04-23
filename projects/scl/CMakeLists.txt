@@ -1,4 +1,4 @@
-project(scl_homework)
+project(scl)
 
 add_subdirectory(src)
 add_subdirectory(test)

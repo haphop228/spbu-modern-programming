@@ -1,0 +1,15 @@
+project(random)
+
+add_executable(${PROJECT_NAME} main.cpp)
+
+find_path(LIB_INCLUDES_1 long_number.hpp ../scl/src/long_number)
+find_path(LIB_INCLUDES_2 doubly_linked_list.hpp ../scl/src/list)
+#message("LIB1 FOUND!")
+#message(${LIB_INCLUDES_1})
+#message("")
+
+include_directories(${LIB_INCLUDES_1})
+include_directories(${LIB_INCLUDES_2})
+target_link_libraries(${PROJECT_NAME} scl_lib)
+
+

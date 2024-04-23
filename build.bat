@@ -28,7 +28,9 @@ set arr[3].file=run_base_theory_p1.bat
 set arr[4].file=run_base_theory_tasks_p1.bat
 set arr[5].file=run_obuchaika.bat
 set arr[6].file=run_merge_sort.bat
-set arr[7].file=run_long_number.bat
+set arr[7].file=run_random.bat
+set arr[8].file=run_test_long_number.bat
+::set arr[9].file=run_vector.bat
 
 
 set arr[0].folder=bubble_sort
@@ -38,9 +40,12 @@ set arr[3].folder=base_theory_p1
 set arr[4].folder=base_theory_tasks_p1
 set arr[5].folder=obuchaika
 set arr[6].folder=merge_sort
-set arr[7].folder=long_number
+set arr[7].folder=random
+::set arr[8].folder=scl
+set arr[8].folder=scl\test\long_number
+::set arr[9].folder=vector
 
-for /L %%i in (0,1,7) do ( 
+for /L %%i in (0,1,8) do ( 
 	copy ..\%SOURCE_FOLDER%\!arr[%%i].folder!\!arr[%%i].file! .\!arr[%%i].folder!
 )
 
