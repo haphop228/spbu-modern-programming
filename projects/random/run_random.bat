@@ -2,4 +2,4 @@
 chcp 65001 > log
 del log
 
-long_number.exe
+example_static_array.exe

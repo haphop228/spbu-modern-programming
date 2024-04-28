@@ -5,8 +5,12 @@
 typedef AKrivoshein::LongNumber ln;
 //typedef IBusko::DoublyLinkedList node;
 
-int main(){
-	std::cout<<"Hello World!";
-	
-	return 0;
+int main() {
+	char a = 10;
+	IBusko::DoublyLinkedList<int> b;
+	//std::cout << typeid(b).name() << std::endl;
+	//std::cout << typeid(a).name() << std::endl;
+	//b;
+	b.push_back(a);
+	b.print();
 }
