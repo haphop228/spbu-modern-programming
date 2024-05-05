@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <iostream>
 
 namespace IBusko {
 	template <typename T> 

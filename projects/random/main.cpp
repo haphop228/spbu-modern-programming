@@ -1,16 +1,14 @@
 #include <iostream>
-#include "long_number.hpp"
-#include "doubly_linked_list.hpp"
-
-typedef AKrivoshein::LongNumber ln;
+#include "templates.cpp"
 //typedef IBusko::DoublyLinkedList node;
 
 int main() {
 	char a = 10;
+	std::cout<<"Hello world!";
 	IBusko::DoublyLinkedList<int> b;
 	//std::cout << typeid(b).name() << std::endl;
 	//std::cout << typeid(a).name() << std::endl;
 	//b;
-	b.push_back(a);
-	b.print();
+	//b.push_back(a);
+	//b.print();
 }
