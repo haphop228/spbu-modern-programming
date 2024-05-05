@@ -3,12 +3,17 @@
 //typedef IBusko::DoublyLinkedList node;
 
 int main() {
-	char a = 10;
-	std::cout<<"Hello world!";
+	//std::cout<<"Hello world!";
 	IBusko::DoublyLinkedList<int> b;
+	for (int i = 0; i < 10; i++){
+		b.push_back(i);
+	}
+	//b.print();
+	b.remove_first(9);
+	b.print();
 	//std::cout << typeid(b).name() << std::endl;
 	//std::cout << typeid(a).name() << std::endl;
 	//b;
 	//b.push_back(a);
-	//b.print();
+
 }
