@@ -9,8 +9,19 @@ int main() {
 		b.push_back(i);
 	}
 	//b.print();
-	b.remove_first(9);
+	std::cout<<"\n";
+	//b.remove_first(9);
+	IBusko::DoublyLinkedList<int> a;
+	
+	for (int i = 0; i < 10; i++){
+		b.remove_first(i);
+		b.print();
+		std::cout<<"\n";
+	}
+	
+	std::cout<<"\nLAST PRINT:";
 	b.print();
+	
 	//std::cout << typeid(b).name() << std::endl;
 	//std::cout << typeid(a).name() << std::endl;
 	//b;
