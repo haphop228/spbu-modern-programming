@@ -56,13 +56,11 @@ namespace IBusko {
 			//std::cout<<"IN WHILE\n";
 			if (item_to_remove->value == tmp->value){
 				if (tmp == begin){
-					std::cout<<"1\n";
 					begin = begin->next;
 					delete begin->prev;
 					return 1;
 				}
 				else{
-					std::cout<<"2\n";
 					//std::cout<<"IN IF\n";
 					tmp->prev->next = tmp->next;
 					tmp->next->prev = tmp->prev;
@@ -95,5 +93,23 @@ namespace IBusko {
 		//std::cout << "remove_first END_0\n";
 		return 0;
 	}
-
+	
+	template <typename T>
+	std::size_t DoublyLinkedList<T>::size() const noexcept {
+		std::size_t size = 0;
+		if (begin == nullptr){
+			return size;
+		}
+		else{
+			Node* tmp = begin;
+			while (tmp != end) {
+				size++;
+				tmp = tmp->next;
+			}
+			if (end != nullptr)
+				size++;
+			}
+		return size;
+	}
+		
 }	
