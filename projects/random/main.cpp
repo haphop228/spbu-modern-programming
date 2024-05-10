@@ -5,6 +5,9 @@
 int main() {
 	IBusko::Vector<int> vec; // Initialization working
 	std::cout<<"A";
-	vec.print();
+	//vec.print();
+	vec.insert(0, 1);
+	vec.insert(1, 1);
+	
 
 }
