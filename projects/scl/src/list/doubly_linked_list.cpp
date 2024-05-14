@@ -95,7 +95,7 @@ namespace IBusko {
 	}
 	
 	template <typename T>
-	std::size_t DoublyLinkedList<T>::size() const noexcept {
+	std::size_t DoublyLinkedList<T>::get_size() const noexcept {
 		std::size_t size = 0;
 		if (begin == nullptr){
 			return size;
